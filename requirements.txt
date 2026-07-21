@@ -1,0 +1,81 @@
+# ============================================================
+# REQUIREMENTS.TXT - The "Shopping List" for your Spam Robot
+# ============================================================
+# This file tells Python exactly which external tools (libraries) 
+# to install so your spam classifier runs perfectly.
+# To install everything at once, you type: pip install -r requirements.txt
+# ============================================================
+
+# ---------- DATA HANDLING (The Fridge Manager) ----------
+pandas==2.2.1
+# What it does: Reads, cleans, and manipulates tabular data (like CSV files).
+# Why in this project: Your spam dataset is basically a giant table 
+# (Email Text, Label: Spam/Not Spam). Pandas loads this table, 
+# lets you filter it, drop duplicates, and prepare it before feeding it to the model.
+
+# ---------- MACHINE LEARNING (The Brain Maker) ----------
+scikit-learn==1.4.1.post1
+# What it does: The ultimate Swiss-army knife for classic Machine Learning.
+# Why in this project: 
+# 1. It has the TF-IDF vectorizer (converts text to numbers).
+# 2. It provides the Naive Bayes & Logistic Regression algorithms.
+# 3. It gives you train_test_split to split data.
+# 4. It calculates Precision, Recall, and F1-score to evaluate your model.
+
+# ---------- NATURAL LANGUAGE PROCESSING (The Text Cleaner) ----------
+nltk==3.8.1
+# What it does: Natural Language Toolkit - a library for human language processing.
+# Why in this project: 
+# 1. Provides tokenizers (to break sentences into words).
+# 2. Provides lemmatizers (to turn "running" into "run" using WordNet).
+# 3. Provides a list of standard stopwords (like "the", "is") to remove.
+
+# ---------- UNIT TESTING (The Taste-Tester) ----------
+pytest==8.0.2
+# What it does: A framework for writing and running automated tests.
+# Why in this project: You put test files in the "tests/" folder. 
+# Pytest runs them to check that your preprocess.py functions actually work 
+# (e.g., "If I pass 'HeLLo', does it return 'hello'?"). 
+# If tests fail, your code doesn't get deployed.
+
+# ---------- EXPERIMENT TRACKING (The Lab Notebook) ----------
+mlflow==2.11.1
+# What it does: Tracks every time you train a model (logs parameters, metrics, and the model file).
+# Why in this project: When you try 50 different hyperparameters for Logistic Regression, 
+# MLflow automatically records them all. Later, you can open its UI and easily see 
+# which run had the best Precision/Recall. No more manual Excel sheets!
+
+# ---------- DATA VERSION CONTROL (The Fridge Sticky-Note) ----------
+dvc==3.48.0
+# What it does: Version controls large datasets and pipeline steps (like Git, but for data).
+# Why in this project: Your 5,000+ email CSV files are too big for regular Git. 
+# DVC stores the actual data in the cloud, and keeps a lightweight pointer in your Git repo. 
+# If your dataset updates next week, DVC lets you "checkout" the new version easily.
+
+# ---------- WEB SERVER / API (The Delivery Robot) ----------
+fastapi==0.110.0
+# What it does: A modern web framework for building APIs (Application Programming Interfaces).
+# Why in this project: Once your model is trained, you wrap it in a FastAPI app. 
+# This creates a URL endpoint (e.g., https://yourapp.com/predict). 
+# Your app users can send an email to this URL, and FastAPI sends back "Spam" or "Not Spam".
+
+uvicorn==0.28.0
+# What it does: An ASGI server that runs your FastAPI app (makes it go "live").
+# Why in this project: FastAPI is just the blueprint; Uvicorn is the engine that 
+# actually listens for incoming web requests and starts the prediction process.
+
+# ---------- DATABASE / STORAGE (The Filing Cabinet) ----------
+sqlalchemy==2.0.28
+# What it does: An Object-Relational Mapper (ORM) that lets Python talk to databases (like SQLite, PostgreSQL).
+# Why in this project: 
+# 1. You might store every prediction your model makes in a database (to log how many spams it caught).
+# 2. More importantly, you use it to store historical input data. 
+#    This helps Evidently (the next library) compare "old" data vs "new" data to detect drift!
+
+# ---------- DRIFT DETECTION (The Smoke Alarm) ----------
+evidently==0.4.18
+# What it does: Analyzes your model's performance and the incoming data to detect "drift".
+# Why in this project: 
+# - Data Drift: Detects when new emails start using words your model has never seen (new slang).
+# - Concept Drift: Detects when the relationship changes (e.g., scammers change their story).
+# It runs in the background and alerts you when it's time to retrain the model!
