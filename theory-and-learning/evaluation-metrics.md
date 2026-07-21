@@ -118,3 +118,5 @@ Disease Diagnosis / Fraud Detection	Recall	The cost of missing the positive case
 A/B Testing / General Business	Accuracy	Only if your classes are perfectly balanced (50% spam, 50% not spam). In the real world, this almost never happens.
 When you need a single number	F1-Score	When you care about both but have no preference, use F1 to compare two different models quickly.
 The Golden Rule: Never, ever look at Accuracy in isolation. Always ask for Precision and Recall (or the F1-score) before trusting a model's performance.
+
+
